@@ -1,0 +1,45 @@
+{
+  "name": "cs50-final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nickanda/cs50-final.git"
+  },
+  "author": "Nicholas Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nickanda/cs50-final/issues"
+  },
+  "homepage": "https://github.com/Nickanda/cs50-final#readme",
+  "dependencies": {
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.10.16",
+    "@mui/material": "^5.10.16",
+    "argon2": "^0.30.2",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.28.0",
+    "eslint-config-next": "^13.0.5",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.4",
+    "next": "^13.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "uid": "^2.0.1"
+  }
+}
