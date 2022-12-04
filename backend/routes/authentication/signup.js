@@ -1,4 +1,6 @@
+const argon2 = require('argon2');
 const express = require('express');
+const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
@@ -16,7 +18,7 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const user = await users.findOne({
+    let user = await users.findOne({
       username: username
     }).exec();
 
@@ -33,12 +35,11 @@ router.post('/', async (req, res) => {
       password: hashedPassword
     });
 
-    const cookie = uid(32);
+    const cookie = uuidv4();
 
-    res.cookie('antlab-session', cookie, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365
-    });
+    user = await users.findOne({
+      username: username
+    }).exec();
 
     await cookies.create({
       cookie: cookie,
@@ -48,8 +49,10 @@ router.post('/', async (req, res) => {
     return res.json({
       status: 'ok',
       message: 'Signup successful',
+      cookie: cookie
     });
   } catch (err) {
+    console.log(err)
     return res.status(500).json({
       status: 'error',
       message: 'Internal server error',

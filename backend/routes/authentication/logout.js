@@ -5,13 +5,17 @@ const router = express.Router();
 const cookies = require('../../../models/cookies');
 
 router.get('/', async (req, res) => {
-  res.clearCookie('antlab-session');
-  
   await cookies.deleteOne({
     cookie: req.cookies['antlab-session']
   });
 
-  res.redirect(301, '/');
+  res.clearCookie('antlab-session');
+
+  // res.json({
+  //   status: 'ok'
+  // });
+
+  res.redirect(302, 'http://localhost:3000/');
 });
 
 module.exports = router;

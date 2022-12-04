@@ -1,6 +1,6 @@
 const argon2 = require('argon2');
 const express = require('express');
-const uid = require('uid');
+const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
@@ -33,24 +33,20 @@ router.post('/', async (req, res) => {
     if (!validPassword)
       return res.status(400).json({
         status: 'error',
-        message: 'Invalid password',
+        message: 'Incorrect password',
       });
 
-    const cookie = uid(32);
-
-    res.cookie('antlab-session', cookie, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365
-    });
-
+    const cookie = uuidv4();
+    
     await cookies.create({
       cookie: cookie,
-      userId: user._id
+      user: user._id
     });
 
     return res.json({
       status: 'ok',
       message: 'Login successful',
+      cookie: cookie
     });
   } catch (err) {
     return res.status(500).json({

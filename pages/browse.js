@@ -2,11 +2,11 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Layout from '../components/Layout';
 
-export default function Home({ username }) {
+export default function Contact({ username, data }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/home" username={username} />
+      <Layout page="/browse" username={username} data={data} />
     </React.Fragment>
   );
 }
@@ -14,17 +14,24 @@ export default function Home({ username }) {
 export async function getServerSideProps(context) {
   const res = await fetch('http://localhost:3001/api/authentication/session', {
     method: 'GET',
-    credentials: 'include',
     headers: {
-      'Access-Control-Allow-Credentials': true,
       'Cookie': context.req.headers.cookie
     }
   });
   const data = await res.json();
+
+  const antRes = await fetch('/api/ants/database', {
+    method: 'GET',
+    headers: {
+      'Cookie': context.req.headers.cookie
+    }
+  });
+  const antData = await antRes.json();
     
   return {
       props: {
-        username: data.username || null
+        username: data.username || null,
+        data: antData.data
       }
     }
 }

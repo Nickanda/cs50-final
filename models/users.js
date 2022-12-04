@@ -7,11 +7,6 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
   password: {
     type: String,
     required: true
@@ -23,7 +18,7 @@ const userSchema = new Schema({
   }
 });
 
-userSchema.index({ username: 1, email: 1 }, {
+userSchema.index({ username: 1 }, {
   collation: {
     locale: 'en',
     strength: 2
