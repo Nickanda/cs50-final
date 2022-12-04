@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const antSchema = new Schema({
-  owner: {
+  owner: [{
     type: Schema.Types.ObjectId,
     ref: 'users',
     required: true
-  },
+  }],
   species: {
     type: String,
     required: true
