@@ -2,11 +2,11 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Layout from '../components/Layout';
 
-export default function Contact({ username, data }) {
+export default function Contact({ user, data }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/browse" username={username} data={data} />
+      <Layout page="/browse" user={user} data={data} />
     </React.Fragment>
   );
 }
@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
   });
   const data = await res.json();
 
-  const antRes = await fetch('/api/ants/database', {
+  const antRes = await fetch('http://localhost:3001/api/ants/database?user=' + data.user._id, {
     method: 'GET',
     headers: {
       'Cookie': context.req.headers.cookie
@@ -30,7 +30,7 @@ export async function getServerSideProps(context) {
     
   return {
       props: {
-        username: data.username || null,
+        user: data.user || null,
         data: antData.data
       }
     }

@@ -18,7 +18,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 const pages = ['About', 'Browse', 'Contact'];
 const protectedPages = [];
-const settings = ['Account', 'Settings'];
+const settings = ['Dashboard', 'Settings'];
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -110,7 +110,7 @@ export default function ResponsiveAppBar({ username }) {
                 }}
               >
                 <MenuItem key='Home' onClick={handleCloseNavMenu} component={Link} href='/'>
-                  <Typography textAlign='center'>HOME</Typography>
+                  <Typography textAlign='center'>Home</Typography>
                 </MenuItem>
 
                 {pages.map((page) => (

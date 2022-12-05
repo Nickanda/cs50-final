@@ -2,6 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
+router.use('/account/data', require('./account/data'));
+router.use('/account/delete', require('./account/delete'));
+
 router.use('/ants/database', require('./ants/database'));
 router.use('/ants/upload', require('./ants/upload'));
 

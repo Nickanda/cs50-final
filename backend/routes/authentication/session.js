@@ -25,7 +25,10 @@ router.get('/', async (req, res) => {
   return res.json({
     status: 'ok',
     message: 'Validated',
-    username: foundCookie.user.username
+    user: {
+      _id: foundCookie.user._id,
+      username: foundCookie.user.username
+    }
   });
 });
 

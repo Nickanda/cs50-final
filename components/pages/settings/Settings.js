@@ -118,7 +118,25 @@ export default function Home() {
   };
 
   const confirmDeleteAccount = () => {
-    console.log('Delete account');
+    fetch('http://localhost:3001/api/authentication/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': document.cookie
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status == 'ok') {
+        window.location.href = '/';
+      } else {
+        setValues({
+          ...values,
+          openAlert: true,
+          resetError: data.message
+        });
+      }
+    });
   }
 
   return (
@@ -171,7 +189,7 @@ export default function Home() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size='small' component={Link} href='/api/account/data'>Request</Button>
+              <Button size='small' component={Link} href='http://localhost:3001/api/account/data'>Request</Button>
             </CardActions>
           </Card>
         </Grid>

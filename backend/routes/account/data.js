@@ -1,12 +1,19 @@
 const express = require('express');
+const fs = require('fs/promises');
+const path = require('path');
 
 const router = express.Router();
 
 const ants = require('../../../models/ants');
 const cookies = require('../../../models/cookies');
-const users = require('../../../models/users');
 
 router.get('/', async (req, res) => {
+  if (!req.cookies?.['antlab-session'])
+    return res.status(401).json({
+      status: 'error',
+      message: 'Unauthorized',
+    });
+
   const cookie = await cookies.findOne({
     cookie: req.cookies['antlab-session']
   }).populate('user').exec();
@@ -19,20 +26,23 @@ router.get('/', async (req, res) => {
 
   const user = cookie.user;
 
-  const cookies = await cookies.find({
+  const cookiesFound = await cookies.find({
     user: user._id
   }).exec();
 
-  const ants = await ants.find({
+  const antsFound = await ants.find({
     owner: user._id
   }).exec();
 
-  res.json({
-    status: 'ok',
+  await fs.writeFile(path.join(__dirname, '../../../tmp/data.json'), JSON.stringify({
     data: {
-      ants: ants,
+      ants: antsFound,
       user: user,
-      cookies: cookies
+      cookies: cookiesFound
     }
-  });
+  }))
+
+  res.download('./tmp/data.json');
 });
+
+module.exports = router;
