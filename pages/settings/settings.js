@@ -2,11 +2,11 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Layout from '../../components/Layout';
 
-export default function Dashboard({ username }) {
+export default function Dashboard({ user }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/settings" username={username} />
+      <Layout page="/settings" user={user} />
     </React.Fragment>
   );
 }

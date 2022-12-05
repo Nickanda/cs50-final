@@ -193,7 +193,7 @@ export default function Signup() {
         <br />
         <br />
 
-        <Button variant='contained' onClick={signUp}>Sign up</Button>
+        <Button type="submit" variant='contained' onClick={signUp}>Sign up</Button>
 
         <br />
 

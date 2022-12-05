@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,7 +12,7 @@ export default function RemovableAlert({ text, open, onClick }) {
       <Alert
         variant='filled'
         severity='error'
-        sx={{ mb: 2 }}
+        sx={{ mt: 2, mb: 2 }}
         action={
           <IconButton
             aria-label="close"
@@ -26,4 +27,9 @@ export default function RemovableAlert({ text, open, onClick }) {
       </Alert>
     </Collapse>
   )
+}
+
+RemovableAlert.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 }

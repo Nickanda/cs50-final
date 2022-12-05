@@ -11,10 +11,6 @@ router.get('/', async (req, res) => {
 
   res.clearCookie('antlab-session');
 
-  // res.json({
-  //   status: 'ok'
-  // });
-
   res.redirect(302, 'http://localhost:3000/');
 });
 

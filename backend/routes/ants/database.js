@@ -1,8 +1,13 @@
 const express = require('express');
+const fs = require('fs/promises');
+const multer  = require('multer');
+
+const upload = multer({ dest: 'public/static/images/' })
 
 const router = express.Router();
 
 const ants = require('../../../models/ants');
+const cookies = require('../../../models/cookies');
 
 router.get('/', async (req, res) => {
   const options = req.body.options;
@@ -35,6 +40,71 @@ router.get('/', async (req, res) => {
     status: 'ok',
     data: antFinds,
   });
+});
+
+router.post('/', upload.single('image'), async (req, res) => {
+  const { species, caste, feignsDeath, HL, HH, EL, WL, MH, PL, PH, GL, TL } = req.body;
+
+  if (!req.file) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'No image was uploaded',
+    });
+  }
+
+  if (!species || !caste || !feignsDeath || !HL || !HH || !EL || !WL || !MH || !PL || !PH || !GL || !TL) {
+    await fs.unlink('public/static/images/' + req.file.filename);
+    return res.status(400).json({
+      status: 'error',
+      message: 'Missing required fields',
+    });
+  }
+
+  if (!req.body.cookie) {
+    await fs.unlink('public/static/images/' + req.file.filename);
+    return res.status(401).json({
+      status: 'error',
+      message: 'Unauthorized',
+    });
+  }
+
+  const cookie = await cookies.findOne({ cookie: req.body.cookie }).populate('user').exec();
+
+  if (!cookie) {
+    await fs.unlink('public/static/images/' + req.file.filename);
+    return res.status(401).json({
+      status: 'error',
+      message: 'Unauthorized',
+    });
+  }
+
+  await ants.create({
+    owner: [cookie.user._id],
+    species: species,
+    caste: caste,
+    feignsDeath: feignsDeath,
+    image: req.file.filename,
+    lengths: {
+      HL: HL,
+      HH: HH,
+      EL: EL,
+      WL: WL,
+      MH: MH,
+      PL: PL,
+      PH: PH,
+      GL: GL,
+      TL: TL,
+    },
+    date: new Date(),
+  });
+
+  res.json({
+    status: 'ok',
+  });
+});
+
+router.put('/', async (req, res) => {
+
 });
 
 module.exports = router;

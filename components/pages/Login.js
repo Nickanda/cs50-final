@@ -148,7 +148,7 @@ export default function Login() {
         <br />
         <br />
 
-        <Button variant='contained' onClick={logIn}>Log In</Button>
+        <Button type="submit" variant='contained' onClick={logIn}>Log In</Button>
 
         <br />
 
