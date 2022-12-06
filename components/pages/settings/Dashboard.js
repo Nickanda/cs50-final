@@ -18,7 +18,7 @@ export default function Home({ data, user }) {
     openAlert: false,
     confirmationError: null,
     openUpload: false,
-    openInfo: false,
+    openLearnMore: null,
     antData: null
   });
 
@@ -170,14 +170,6 @@ export default function Home({ data, user }) {
     });
   }
 
-  const handleManage = (item) => {
-    setValues({
-      ...values,
-      openManage: !values.openManage,
-      antData: item
-    });
-  }
-
   return (
     <Container maxWidth='xl'>
       <Typography variant='h4' component='h1' align='center'>
@@ -230,9 +222,7 @@ export default function Home({ data, user }) {
         </Container>
       </Grid>
 
-      {data.length > 0 ? data.filter(d => d.owner.includes(user._id)).map(item => (
-        <AntInfoDialog key={item._id} data={item} open={values.openLearnMore == item._id} onClose={handleInfoClose} />
-      )) : null}
+      <AntInfoDialog data={data.find(d => d._id == values.openLearnMore)} open={values.openLearnMore !== null} onClose={handleInfoClose} />
 
       <AntManageDialog
         data={data.find(d => d._id == values.antData)}

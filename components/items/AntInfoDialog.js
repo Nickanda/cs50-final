@@ -17,20 +17,20 @@ export default function AntInfoDialog({ data, open, onClose}) {
       fullWidth
       scroll='paper'
     >
-      <DialogTitle>{data.species} ({data.caste})</DialogTitle>
+      <DialogTitle>{data?.species} ({data?.caste})</DialogTitle>
       <DialogContent>
         <DialogContentText>
           <Typography>
-            <b>Species:</b> {data.species}
+            <b>Species:</b> {data?.species}
           </Typography>
           <Typography>
-            <b>Caste:</b> {data.caste}
+            <b>Caste:</b> {data?.caste}
           </Typography>
           <Typography>
-            <b>Feigns Death?</b> {data.feignsDeath ? 'Yes' : 'No'}
+            <b>Feigns Death?</b> {data?.feignsDeath ? 'Yes' : 'No'}
           </Typography>
           <Typography>
-            <b>Date Created:</b> {data.date}
+            <b>Date Created:</b> {data?.date}
           </Typography>
         </DialogContentText>
       </DialogContent>

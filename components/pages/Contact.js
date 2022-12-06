@@ -1,6 +1,9 @@
 import * as React from 'react';
+import Image from 'next/image';
 
 import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 export default function Home() {
@@ -11,24 +14,41 @@ export default function Home() {
       </Typography>
 
       <Typography variant='body1' align='center'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        If you have any questions, comments, or concerns, please feel free to contact any of the following people!
       </Typography>
+
+      <br />
 
       <Typography variant='h5' component='h2' align='center'>
         Lab Instructors
       </Typography>
 
-      <Typography variant='body1' align='center'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      </Typography>
+      <br />
 
-
+      <Grid container spacing={2}>
+        <Grid item xs={5} align="right">
+          <Image src='/static/images/buck_trible.jpeg' alt='Buck Trible' width='220' height='220' />
+        </Grid>
+        <Grid item xs={7}>
+          <Typography variant='h6' component='h3'>
+            Buck Trible 
+          </Typography>
+          <Typography variant='body1'>
+            <b>Email:</b> <Link href='mailto:bucktrible@g.harvard.edu'>bucktrible@g.harvard.edu</Link>
+          </Typography>
+        </Grid>
+        <Grid item xs={5} align="right">
+          <Image src='/static/images/gautum_reddy.jpeg' alt='Gautum Reddy' width='220' height='257' />
+        </Grid>
+        <Grid item xs={7}>
+          <Typography variant='h6' component='h3'>
+            Gautum Reddy
+          </Typography>
+          <Typography variant='body1'>
+            <b>Email:</b> <Link href='mailto:gautam_nallamala@fas.harvard.edu'>gautam_nallamala@fas.harvard.edu</Link>
+          </Typography>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

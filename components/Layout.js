@@ -28,12 +28,21 @@ const pages = {
 
 export default function Layout({ page, user, data }) {
   return (
-    <Container disableGutters>
-      <Navbar username={user ? user.username : null} />
-      <Box sx={{ my: 4, }}>
+    <Container sx={{
+      flexGrow: 1,
+      flexShrink: 0,
+      flexBasis: 'auto'
+    }}>
+      <Navbar username={user ? user.username : null} sx={{ flexShrink: 0 }} />
+      <Box sx={{
+        my: 4,
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '78vh'
+      }}>
         {React.createElement(pages[page], { data: data, user: user })}
       </Box>
-      <Copyright />
+      <Copyright sx={{ my: 4, flexShrink: 0 }} />
     </Container>
   );
 }
