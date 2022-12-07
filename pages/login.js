@@ -12,7 +12,7 @@ export default function Login({ user }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch('http://localhost:3001/api/authentication/session');
+  const res = await fetch('http://127.0.0.1:3001/api/authentication/session');
   const data = await res.json()
     
   return {

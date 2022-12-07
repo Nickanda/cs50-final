@@ -62,7 +62,7 @@ export default function AntManageDialog({
           fullWidth
           variant="standard"
           onChange={handleUpdateValue}
-          value={save && data ? data.species : ''}
+          value={save ? data.species : undefined}
         />
         <TextField
           margin="dense"
@@ -73,7 +73,7 @@ export default function AntManageDialog({
           fullWidth
           variant="standard"
           onChange={handleUpdateValue}
-          value={save && data ? data.caste : ''}
+          value={save ? data.caste : undefined}
         />
 
         <FormControl sx={{
@@ -85,7 +85,7 @@ export default function AntManageDialog({
             aria-labelledby="feigns-death-label"
             name="feigns-death"
             onChange={handleRadioUpload}
-            value={save && data ? JSON.stringify(data.feignsDeath) : ''}
+            value={save ? JSON.stringify(data.feignsDeath) : undefined}
           >
             <FormControlLabel value="true" control={<Radio />} label="True" />
             <FormControlLabel value="false" control={<Radio />} label="False" />
@@ -109,7 +109,7 @@ export default function AntManageDialog({
                 accept: ".jpg,.jpeg,.png"
               }} />
           </Button>
-          )}
+        )}
 
         {['HL', 'HH', 'EL', 'WL', 'MH', 'PL', 'PH', 'GL', 'TL'].map((item, index) => (
           <TextField
@@ -123,13 +123,13 @@ export default function AntManageDialog({
             variant="standard"
             onChange={handleSpecialUpload}
             onWheel={(e) => e.target.blur()}
-            value={save && data ? data["lengths"][item] : ''}
+            value={save ? data[item] : undefined}
           />
         ))}
       </DialogContent>
       <DialogActions>
-        <Button color='error' onClick={() => handleOpenUpload(antData)}>Cancel</Button>
-        {save ? <Button onClick={confirmUpload}>Upload</Button> : <Button onClick={confirmSave}>Save</Button>}
+        <Button color='error' onClick={() => handleOpenUpload(antData || null)}>Cancel</Button>
+        {save ? <Button onClick={confirmSave}>Save</Button> : <Button onClick={confirmUpload}>Upload</Button>}
       </DialogActions>
     </Dialog>
   )

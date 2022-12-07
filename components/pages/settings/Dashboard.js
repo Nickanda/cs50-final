@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCookies } from 'react-cookie';
+import useCookies from 'react-cookie/cjs/useCookies';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -44,11 +44,47 @@ export default function Home({ data, user }) {
     setValues({
       ...values,
       openUpload: !values.openUpload,
-      antData: item ? item : null
+      antData: item
     });
+
+    if (item) {
+      const antData = data.find((ant) => ant._id === item);
+      setUpload({
+        species: antData.species,
+        caste: antData.caste,
+        feignsDeath: antData.feignsDeath,
+        image: antData.image,
+        HL: antData.lengths.HL,
+        HH: antData.lengths.HH,
+        EL: antData.lengths.EL,
+        WL: antData.lengths.WL,
+        MH: antData.lengths.MH,
+        PL: antData.lengths.PL,
+        PH: antData.lengths.PH,
+        GL: antData.lengths.GL,
+        TL: antData.lengths.TL
+      });
+    } else {
+      setUpload({
+        species: '',
+        caste: '',
+        feignsDeath: '',
+        image: '',
+        HL: '',
+        HH: '',
+        EL: '',
+        WL: '',
+        MH: '',
+        PL: '',
+        PH: '',
+        GL: '',
+        TL: ''
+      })
+    }
   };
 
   const handleUpdateValue = (e) => {
+    console.log(e.target.name, e.target.value);
     setUpload({
       ...upload,
       [e.target.id]: e.target.value
@@ -56,9 +92,10 @@ export default function Home({ data, user }) {
   }
 
   const handleSpecialUpload = (e) => {
+    console.log(upload)
     setUpload({
       ...upload,
-      [e.target.id]: JSON.parse(e.target.value) || 0
+      [e.target.id]: isNaN(parseFloat(e.target.value)) ? 0 : parseFloat(e.target.value)
     });
   };
 
@@ -92,31 +129,30 @@ export default function Home({ data, user }) {
       formData.append(key, upload[key]);
     }
 
-    formData.append('cookie', cookie['antlab-session']);
-
-    fetch("http://localhost:3001/api/ants/database", {
+    fetch("http://127.0.0.1:3001/api/ants/database", {
       method: "POST",
+      credentials: 'include',
       body: formData
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.status == 'ok') {
-        location.reload();
-      } else {
-        setValues({
-          ...values,
-          openAlert: true,
-          confirmationError: data.message
-        });
-      }
-    });
+      .then(res => res.json())
+      .then(data => {
+        if (data.status == 'ok') {
+          location.reload();
+        } else {
+          setValues({
+            ...values,
+            openAlert: true,
+            confirmationError: data.message
+          });
+        }
+      });
   };
 
-  const confirmSave = (e) => {
-    const formData = new FormData();
+  const confirmSave = () => {
+    const saveData = {}
 
     for (const key in upload) {
-      if (upload[key] === '') {
+      if (upload[key] === '' && key !== "image") {
         setValues({
           ...values,
           openAlert: true,
@@ -125,27 +161,33 @@ export default function Home({ data, user }) {
         return;
       }
 
-      formData.append(key, upload[key]);
+      saveData[key] = upload[key];
     }
 
-    formData.append('cookie', cookie['antlab-session']);
+    saveData._id = values.antData;
 
-    fetch("http://localhost:3001/api/ants/database?_method=PUT", {
-      method: "POST",
-      body: formData
+    console.log(document.cookie)
+
+    fetch("http://127.0.0.1:3001/api/ants/database", {
+      method: "PUT",
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(saveData)
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.status == 'ok') {
-        location.reload();
-      } else {
-        setValues({
-          ...values,
-          openAlert: true,
-          confirmationError: data.message
-        });
-      }
-    });
+      .then(res => res.json())
+      .then(data => {
+        if (data.status == 'ok') {
+          location.reload();
+        } else {
+          setValues({
+            ...values,
+            openAlert: true,
+            confirmationError: data.message
+          });
+        }
+      });
   };
 
   const handleAlertRemoval = () => {
@@ -198,7 +240,7 @@ export default function Home({ data, user }) {
                 </Typography>
                 <Typography variant='caption' color='text.secondary'>
                   Created on: {item.date}
-              </Typography>
+                </Typography>
               </CardContent>
               <CardActions>
                 <Button size='small' onClick={() => handleOpenUpload(item._id)}>Manage</Button>
@@ -225,20 +267,20 @@ export default function Home({ data, user }) {
       <AntInfoDialog data={data.find(d => d._id == values.openLearnMore)} open={values.openLearnMore !== null} onClose={handleInfoClose} />
 
       <AntManageDialog
-        data={data.find(d => d._id == values.antData)}
+        data={upload}
         values={values}
         functions={{
-          handleOpenUpload: handleOpenUpload, 
-          handleAlertRemoval: handleAlertRemoval, 
-          handleUpdateValue: handleUpdateValue, 
+          handleOpenUpload: handleOpenUpload,
+          handleAlertRemoval: handleAlertRemoval,
+          handleUpdateValue: handleUpdateValue,
           handleRadioUpload: handleRadioUpload,
-          handleSpecialUpload: handleSpecialUpload, 
-          handleImageUpload: handleImageUpload, 
+          handleSpecialUpload: handleSpecialUpload,
+          handleImageUpload: handleImageUpload,
           confirmUpload: confirmUpload,
           confirmSave: confirmSave,
         }}
         save={values.antData !== null}
-         />
+      />
     </Container>
   );
 }

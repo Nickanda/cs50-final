@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.use('/account/data', require('./account/data'));
 router.use('/account/delete', require('./account/delete'));
+router.use('/account/reset-password', require('./account/reset-password'));
 
 router.use('/ants/database', require('./ants/database'));
 

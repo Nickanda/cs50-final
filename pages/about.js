@@ -12,11 +12,9 @@ export default function About({ user }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch('http://localhost:3001/api/authentication/session', {
+  const res = await fetch('http://127.0.0.1:3001/api/authentication/session', {
     method: 'GET',
-    credentials: 'include',
     headers: {
-      'Access-Control-Allow-Credentials': true,
       'Cookie': context.req.headers.cookie
     }
   });

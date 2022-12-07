@@ -197,7 +197,7 @@ export default function ResponsiveAppBar({ username }) {
                   </MenuItem>
                 ))}
 
-                <MenuItem key='Logout' onClick={handleCloseUserMenu} component={Link} href={`http://localhost:3001/api/authentication/logout`}>
+                <MenuItem key='Logout' onClick={handleCloseUserMenu} component={Link} href={`http://127.0.0.1:3001/api/authentication/logout`}>
                   <Typography textAlign='center'>Logout</Typography>
                 </MenuItem>
               </Menu>

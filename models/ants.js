@@ -68,11 +68,4 @@ const antSchema = new Schema({
   },
 });
 
-antSchema.index({ species: 1, caste: 1 }, {
-  collation: {
-    locale: 'en',
-    strength: 2
-  }
-});
-
 module.exports = mongoose.model('ants', antSchema);

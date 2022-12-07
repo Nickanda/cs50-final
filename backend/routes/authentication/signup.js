@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
   try {
     let user = await users.findOne({
       username: username
-    }).exec();
+    }).collation({ locale: 'en', strength: 2 }).exec();
 
     if (user)
       return res.status(400).json({

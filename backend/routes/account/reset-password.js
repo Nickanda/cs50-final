@@ -1,13 +1,13 @@
+const argon2 = require('argon2');
 const express = require('express');
-const fs = require('fs/promises');
-const path = require('path');
 
 const router = express.Router();
 
 const ants = require('../../../models/ants');
 const cookies = require('../../../models/cookies');
+const users = require('../../../models/users');
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
   console.log(req.cookies)
   if (!req.cookies?.['antlab-session'])
     return res.status(401).json({
@@ -27,23 +27,21 @@ router.get('/', async (req, res) => {
 
   const user = cookie.user;
 
-  const cookiesFound = await cookies.find({
-    user: user._id
-  }).exec();
+  if (await argon2.verify(user.password, req.body.oldPassword)) {
+    user.password = await argon2.hash(req.body.newPassword);
 
-  const antsFound = await ants.find({
-    owner: user._id
-  }).exec();
+    await user.save();
 
-  await fs.writeFile(path.join(__dirname, '../../../tmp/data.json'), JSON.stringify({
-    data: {
-      ants: antsFound,
-      user: user,
-      cookies: cookiesFound
-    }
-  }))
-
-  res.download('./tmp/data.json');
+    return res.json({
+      status: 'success',
+      message: 'Password changed'
+    });
+  } else {
+    return res.status(401).json({
+      status: 'error',
+      message: 'Unauthorized'
+    });
+  }
 });
 
 module.exports = router;

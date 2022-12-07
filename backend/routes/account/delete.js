@@ -6,7 +6,7 @@ const ants = require('../../../models/ants');
 const cookies = require('../../../models/cookies');
 const users = require('../../../models/users');
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
   const cookie = await cookies.findOne({
     cookie: req.cookies['antlab-session']
   }).populate('user').exec();
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
 
   res.clearCookie('antlab-session');
 
-  res.redirect(302, 'http://localhost:3000/');
+  res.redirect(302, 'http://127.0.0.1:3000/');
 });
 
 module.exports = router;

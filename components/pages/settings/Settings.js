@@ -92,11 +92,11 @@ export default function Home() {
       return;
     }
 
-    fetch('http://localhost:3001/api/authentication/reset-password', {
+    fetch('http://127.0.0.1:3001/api/account/reset-password', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': document.cookie
       },
       body: JSON.stringify({
         oldPassword: passwords.oldPassword,
@@ -118,11 +118,11 @@ export default function Home() {
   };
 
   const confirmDeleteAccount = () => {
-    fetch('http://localhost:3001/api/authentication/delete', {
+    fetch('http://127.0.0.1:3001/api/account/delete', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': document.cookie
       }
     })
     .then(res => res.json())
@@ -189,7 +189,7 @@ export default function Home() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size='small' component={Link} href='http://localhost:3001/api/account/data'>Request</Button>
+              <Button size='small' component={Link} href='http://127.0.0.1:3001/api/account/data'>Request</Button>
             </CardActions>
           </Card>
         </Grid>

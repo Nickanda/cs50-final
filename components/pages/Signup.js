@@ -1,5 +1,5 @@
 import * as React from 'react';
-import useCookies from 'react-cookie/cjs/useCookies';
+// import useCookies from 'react-cookie/cjs/useCookies';
 
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -31,7 +31,7 @@ export default function Signup() {
     passwordConfirmation: ''
   });
 
-  const [cookie, setCookie] = useCookies(['antlab-session']);
+  // const [cookie, setCookie] = useCookies(['antlab-session']);
 
   const handleClickShowPassword = () => {
     setValues({
@@ -96,8 +96,9 @@ export default function Signup() {
       return;
     }
 
-    fetch('http://localhost:3001/api/authentication/signup', {
+    fetch('http://127.0.0.1:3001/api/authentication/signup', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -110,7 +111,7 @@ export default function Signup() {
     .then(response => response.json())
     .then(data => {
       if (data.status === 'ok') {
-        setCookie('antlab-session', data.cookie, { path: '/', maxAge: 60 * 60 * 24 * 365 });
+        // setCookie('antlab-session', data.cookie, { path: '/', maxAge: 60 * 60 * 24 * 365 });
 
         window.location.href = '/';
       } else {

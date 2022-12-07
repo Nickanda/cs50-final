@@ -7,6 +7,7 @@ const router = express.Router();
 const cookies = require('../../../models/cookies');
 const users = require('../../../models/users');
 
+router.options('/');
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
 
@@ -20,7 +21,7 @@ router.post('/', async (req, res) => {
   try {
     const user = await users.findOne({
       username: username
-    }).exec();
+    }).collation({ locale: 'en', strength: 2 }).exec();
 
     if (!user)
       return res.status(400).json({
@@ -37,10 +38,18 @@ router.post('/', async (req, res) => {
       });
 
     const cookie = uuidv4();
-    
+
     await cookies.create({
       cookie: cookie,
       user: user._id
+    });
+
+    res.cookie('antlab-session', cookie, {
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+      domain: '127.0.0.1',
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true
     });
 
     return res.json({
