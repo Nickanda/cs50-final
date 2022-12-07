@@ -215,7 +215,6 @@ export default function Home() {
             onChange={changeOldPassword}
           />
           <TextField
-            autoFocus
             margin='dense'
             id='newPassword'
             label='New Password'
@@ -225,7 +224,6 @@ export default function Home() {
             onChange={changeNewPassword}
           />
           <TextField
-            autoFocus
             margin='dense'
             id='confirmNewPassword'
             label='Confirm New Password'
