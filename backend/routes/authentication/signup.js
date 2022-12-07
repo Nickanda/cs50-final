@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 
     await cookies.create({
       cookie: cookie,
-      userId: user._id
+      user: user._id
     });
 
     res.cookie('antlab-session', cookie, {

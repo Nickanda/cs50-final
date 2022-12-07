@@ -127,7 +127,7 @@ export default function Signup() {
 
       <br />
 
-      <RemovableAlert text={values.loginError} open={values.openAlert} onClick={handleAlertRemoval} />
+      <RemovableAlert text={values.signupError} open={values.openAlert} onClick={handleAlertRemoval} />
 
       <FormGroup>
         <FormControl>
