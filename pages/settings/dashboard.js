@@ -6,7 +6,7 @@ export default function Account({ user, data }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/dashboard" user={user} data={data} />
+      <Layout page='/dashboard' user={user} data={data} />
     </React.Fragment>
   );
 }

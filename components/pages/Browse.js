@@ -22,7 +22,6 @@ import Typography from '@mui/material/Typography';
 import AntInfoDialog from '../items/AntInfoDialog';
 
 export default function Browse({ data, user }) {
-  console.log(data)
   const [values, setValues] = React.useState({
     openLearnMore: null,
     showFilter: false
@@ -60,8 +59,6 @@ export default function Browse({ data, user }) {
   };
 
   const handleSearch = () => {
-    console.log(filters);
-
     const params = new URLSearchParams();
 
     for (const key in filters) {
@@ -101,28 +98,28 @@ export default function Browse({ data, user }) {
   const handleSpeciesChange = (e) => {
     setFilters({
       ...filters,
-      "species": e.target.value
+      'species': e.target.value
     });
   }
 
   const handleCasteChange = (e) => {
     setFilters({
       ...filters,
-      "caste": e.target.value
+      'caste': e.target.value
     });
   }
 
   const handleFeignChange = (e) => {
     setFilters({
       ...filters,
-      "feignsDeath": JSON.parse(e.target.value)
+      'feignsDeath': JSON.parse(e.target.value)
     });
   }
 
   const handleOrderChange = (e) => {
     setFilters({
       ...filters,
-      "order": e.target.value
+      'order': e.target.value
     });
   }
 
@@ -142,15 +139,15 @@ export default function Browse({ data, user }) {
         <Grid container sx={{ py: 1 }} spacing={1}>
           <Grid item sm={0.5} />
           <Grid item xs={8} sm={10} align='center'>
-            <Input placeholder="Search Species" fullWidth onChange={handleSearchChange} />
+            <Input placeholder='Search Species' fullWidth onChange={handleSearchChange} />
           </Grid>
           <Grid item xs={1.5} sm={0.5}>
-            <IconButton aria-label="search" onClick={handleSearch}>
+            <IconButton aria-label='search' onClick={handleSearch}>
               <SearchIcon />
             </IconButton>
           </Grid>
           <Grid item xs={1.5} sm={0.5}>
-            <IconButton aria-label="filter" onClick={handleFilter}>
+            <IconButton aria-label='filter' onClick={handleFilter}>
               <FilterListIcon />
             </IconButton>
           </Grid>
@@ -161,61 +158,67 @@ export default function Browse({ data, user }) {
         <Grid container sx={{ py: 1, mt: 0.5 }} spacing={1}>
           <Grid item xs={0.5} />
           <Grid item>
-            <Typography variant='h6' sx={{ color: 'gray' }} ml={{xs: 1}}>
+            <Typography variant='h6' sx={{ color: 'gray' }} ml={{ xs: 1 }}>
               Filter Options
             </Typography>
 
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 0, md: 3 }} justifyContent="space-between" direction="row" alignItems="center" ml={{xs: 1}}>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 2, sm: 0, md: 3 }}
+              justifyContent='space-between'
+              direction='row'
+              alignItems='center'
+              ml={{ xs: 1 }}
+            >
               <Grid item>
-                <FormLabel id="species-group-label">Species</FormLabel>
+                <FormLabel id='species-group-label'>Species</FormLabel>
                 <RadioGroup
                   row
-                  aria-labelledby="species-group-label"
-                  name="species-group"
+                  aria-labelledby='species-group-label'
+                  name='species-group'
                   onChange={handleSpeciesChange}
                 >
-                  <FormControlLabel value="asc" control={<Radio />} label="A -> Z" />
-                  <FormControlLabel value="desc" control={<Radio />} label="Z -> A" />
+                  <FormControlLabel value='asc' control={<Radio />} label='A -> Z' />
+                  <FormControlLabel value='desc' control={<Radio />} label='Z -> A' />
                 </RadioGroup>
               </Grid>
 
               <Grid item>
-                <FormLabel id="caste-group-label">Caste</FormLabel>
+                <FormLabel id='caste-group-label'>Caste</FormLabel>
                 <RadioGroup
                   row
-                  aria-labelledby="caste-group-label"
-                  name="caste-group"
+                  aria-labelledby='caste-group-label'
+                  name='caste-group'
                   onChange={handleCasteChange}
                 >
-                  <FormControlLabel value="asc" control={<Radio />} label="A -> Z" />
-                  <FormControlLabel value="desc" control={<Radio />} label="Z -> A" />
+                  <FormControlLabel value='asc' control={<Radio />} label='A -> Z' />
+                  <FormControlLabel value='desc' control={<Radio />} label='Z -> A' />
                 </RadioGroup>
               </Grid>
-            {/* </Grid>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}> */}
               <Grid item>
-                <FormLabel id="feign-death-group-label">Feigns Death?</FormLabel>
+                <FormLabel id='feign-death-group-label'>Feigns Death?</FormLabel>
                 <RadioGroup
                   row
-                  aria-labelledby="feign-death-group-label"
-                  name="feign-death-group"
+                  aria-labelledby='feign-death-group-label'
+                  name='feign-death-group'
                   onChange={handleFeignChange}
                 >
-                  <FormControlLabel value="true" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="false" control={<Radio />} label="No" />
+                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
               </Grid>
 
               <Grid item>
-                <FormLabel id="order-group-label">Order</FormLabel>
+                <FormLabel id='order-group-label'>Order</FormLabel>
                 <RadioGroup
                   row
-                  aria-labelledby="order-group-label"
-                  name="order-group"
+                  aria-labelledby='order-group-label'
+                  name='order-group'
                   onChange={handleOrderChange}
                 >
-                  <FormControlLabel value="desc" control={<Radio />} label="Latest" />
-                  <FormControlLabel value="asc" control={<Radio />} label="Oldest" />
+                  <FormControlLabel value='desc' control={<Radio />} label='Latest' />
+                  <FormControlLabel value='asc' control={<Radio />} label='Oldest' />
                 </RadioGroup>
               </Grid>
             </Grid>
@@ -228,7 +231,13 @@ export default function Browse({ data, user }) {
       <Container maxWidth='lg'>
         <Grid container spacing={4}>
           {changedData.map((item) => (
-            <Grid item key={item._id} xs={12} sm={6} md={4}>
+            <Grid
+              item
+              key={item._id}
+              xs={12}
+              sm={6}
+              md={4}
+            >
               <Card>
                 <CardMedia
                   component='img'
@@ -243,7 +252,7 @@ export default function Browse({ data, user }) {
                 </CardContent>
                 <CardActions>
                   {item.owner.includes(user._id)
-                    ? <Button size='small' component={Link} href="/settings/dashboard">Manage</Button>
+                    ? <Button size='small' component={Link} href='/settings/dashboard'>Manage</Button>
                     : null}
                   <Button size='small' onClick={() => handleLearnMore(item._id)}>Learn More</Button>
                 </CardActions>

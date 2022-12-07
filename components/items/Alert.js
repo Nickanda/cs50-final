@@ -15,12 +15,12 @@ export default function RemovableAlert({ text, open, onClick }) {
         sx={{ mt: 2, mb: 2 }}
         action={
           <IconButton
-            aria-label="close"
-            color="inherit"
-            size="small"
+            aria-label='close'
+            color='inherit'
+            size='small'
             onClick={onClick}
           >
-            <CloseIcon fontSize="inherit" />
+            <CloseIcon fontSize='inherit' />
           </IconButton>
         }>
         {text}
@@ -31,5 +31,5 @@ export default function RemovableAlert({ text, open, onClick }) {
 
 RemovableAlert.propTypes = {
   open: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 }

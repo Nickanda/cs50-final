@@ -6,7 +6,7 @@ export default function Home({ user }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/home" user={user} />
+      <Layout page='/home' user={user} />
     </React.Fragment>
   );
 }

@@ -109,12 +109,22 @@ export default function ResponsiveAppBar({ username }) {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem key='Home' onClick={handleCloseNavMenu} component={Link} href='/'>
+                <MenuItem
+                  key='Home'
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  href='/'
+                >
                   <Typography textAlign='center'>Home</Typography>
                 </MenuItem>
 
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu} component={Link} href={`/${page.toLowerCase()}`}>
+                  <MenuItem
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    href={`/${page.toLowerCase()}`}
+                  >
                     <Typography textAlign='center'>{page}</Typography>
                   </MenuItem>
                 ))}
@@ -192,12 +202,22 @@ export default function ResponsiveAppBar({ username }) {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu} component={Link} href={`/settings/${setting.toLowerCase()}`}>
+                  <MenuItem
+                    key={setting}
+                    onClick={handleCloseUserMenu}
+                    component={Link}
+                    href={`/settings/${setting.toLowerCase()}`}
+                  >
                     <Typography textAlign='center'>{setting}</Typography>
                   </MenuItem>
                 ))}
 
-                <MenuItem key='Logout' onClick={handleCloseUserMenu} component={Link} href={`http://127.0.0.1:3001/api/authentication/logout`}>
+                <MenuItem
+                  key='Logout'
+                  onClick={handleCloseUserMenu}
+                  component={Link}
+                  href={`http://127.0.0.1:3001/api/authentication/logout`}
+                >
                   <Typography textAlign='center'>Logout</Typography>
                 </MenuItem>
               </Menu>

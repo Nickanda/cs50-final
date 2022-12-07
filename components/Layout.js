@@ -3,7 +3,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import Copyright from './Copyright';
+import Footer from './Footer';
 import Navbar from './Navbar';
 
 import About from './pages/About';
@@ -42,7 +42,7 @@ export default function Layout({ page, user, data }) {
       }}>
         {React.createElement(pages[page], { data: data, user: user })}
       </Box>
-      <Copyright sx={{ my: 4, flexShrink: 0 }} />
+      <Footer sx={{ my: 4, flexShrink: 0 }} />
     </Container>
   );
 }

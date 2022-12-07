@@ -24,8 +24,7 @@ export default function Home() {
         Features:
       </Typography>
 
-      <Grid container alignItems="center"
-        justifyContent="center">
+      <Grid container alignItems='center' justifyContent='center'>
         <List sx={{ listStyleType: 'disc' }}>
           <ListItem sx={{ display: 'list-item' }}>View all of the data we have collected so far</ListItem>
           <ListItem sx={{ display: 'list-item' }}>Upload your own data to our database</ListItem>
@@ -39,8 +38,7 @@ export default function Home() {
         Visit some parts of the website:
       </Typography>
 
-      <Grid container alignItems="center"
-        justifyContent="center">
+      <Grid container alignItems='center' justifyContent='center'>
         <List sx={{ listStyleType: 'disc' }}>
           <ListItem sx={{ display: 'list-item' }}><Link href='/browse'>Browse all of the data we have collected so far</Link></ListItem>
           <ListItem sx={{ display: 'list-item' }}><Link href='/login'>Create and log into your own account</Link></ListItem>

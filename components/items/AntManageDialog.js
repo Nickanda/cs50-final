@@ -44,34 +44,34 @@ export default function AntManageDialog({
       fullWidth
       scroll='paper'
     >
-      <DialogTitle>{save ? "Update Data" : "Upload Data"}</DialogTitle>
+      <DialogTitle>{save ? 'Update Data' : 'Upload Data'}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Please complete all parts of the form below to {save ? "save" : "upload"} the ant.
+          Please complete all parts of the form below to {save ? 'save' : 'upload'} the ant.
         </DialogContentText>
 
         <RemovableAlert open={openAlert} text={confirmationError} onClick={handleAlertRemoval} />
 
         <TextField
           autoFocus
-          margin="dense"
-          id="species"
-          label="Species"
-          type="text"
+          margin='dense'
+          id='species'
+          label='Species'
+          type='text'
           required
           fullWidth
-          variant="standard"
+          variant='standard'
           onChange={handleUpdateValue}
           value={save ? data.species : undefined}
         />
         <TextField
-          margin="dense"
-          id="caste"
-          label="Caste"
-          type="text"
+          margin='dense'
+          id='caste'
+          label='Caste'
+          type='text'
           required
           fullWidth
-          variant="standard"
+          variant='standard'
           onChange={handleUpdateValue}
           value={save ? data.caste : undefined}
         />
@@ -79,48 +79,54 @@ export default function AntManageDialog({
         <FormControl sx={{
           mt: 2,
         }}>
-          <FormLabel id="feigns-death-label" required>Feigns Death?</FormLabel>
+          <FormLabel id='feigns-death-label' required>Feigns Death?</FormLabel>
           <RadioGroup
             row
-            aria-labelledby="feigns-death-label"
-            name="feigns-death"
+            aria-labelledby='feigns-death-label'
+            name='feigns-death'
             onChange={handleRadioUpload}
             value={save ? JSON.stringify(data.feignsDeath) : undefined}
           >
-            <FormControlLabel value="true" control={<Radio />} label="True" />
-            <FormControlLabel value="false" control={<Radio />} label="False" />
+            <FormControlLabel value='true' control={<Radio />} label='True' />
+            <FormControlLabel value='false' control={<Radio />} label='False' />
           </RadioGroup>
         </FormControl>
 
         {save ? null : (
-          <Button variant="contained" component="label" sx={{
-            mt: 2,
-            mb: 2
-          }} fullWidth>
+          <Button
+            variant='contained'
+            component='label'
+            sx={{
+              mt: 2,
+              mb: 2
+            }}
+            fullWidth
+          >
             Upload Image (JPG, JPEG, PNG Only)
             <Input
-              type="file"
-              id="image"
+              type='file'
+              id='image'
               onChange={handleImageUpload}
               sx={{
                 display: 'none'
               }}
               inputProps={{
-                accept: ".jpg,.jpeg,.png"
-              }} />
+                accept: '.jpg,.jpeg,.png'
+              }} 
+            />
           </Button>
         )}
 
         {['HL', 'HH', 'EL', 'WL', 'MH', 'PL', 'PH', 'GL', 'TL'].map((item, index) => (
           <TextField
             key={index}
-            margin="dense"
+            margin='dense'
             id={item}
             label={item}
-            type="number"
+            type='number'
             required
             fullWidth
-            variant="standard"
+            variant='standard'
             onChange={handleSpecialUpload}
             onWheel={(e) => e.target.blur()}
             value={save ? data[item] : undefined}

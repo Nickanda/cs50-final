@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import useCookies from 'react-cookie/cjs/useCookies';
 
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -30,8 +29,6 @@ export default function Signup() {
     password: '',
     passwordConfirmation: ''
   });
-
-  // const [cookie, setCookie] = useCookies(['antlab-session']);
 
   const handleClickShowPassword = () => {
     setValues({
@@ -111,8 +108,6 @@ export default function Signup() {
     .then(response => response.json())
     .then(data => {
       if (data.status === 'ok') {
-        // setCookie('antlab-session', data.cookie, { path: '/', maxAge: 60 * 60 * 24 * 365 });
-
         window.location.href = '/';
       } else {
         setValues({
@@ -137,7 +132,12 @@ export default function Signup() {
       <FormGroup>
         <FormControl>
           <InputLabel htmlFor='username'>Username</InputLabel>
-          <Input id='username' margin='normal' type='text' onChange={handleUsernameChange} />
+          <Input 
+          id='username' 
+          margin='normal' 
+          type='text' 
+          onChange={handleUsernameChange} 
+          />
         </FormControl>
 
         <br />
@@ -161,7 +161,8 @@ export default function Signup() {
                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            } />
+            } 
+            />
           <FormHelperText id='password-helper-text'>We&apos;ll never share your password.</FormHelperText>
         </FormControl>
 
@@ -187,14 +188,15 @@ export default function Signup() {
                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            } />
-          <FormHelperText id='password-confirmation-helper-text' error={values.confirmationError}>{values.confirmationError ? "Passwords don't match." : "Type in your password again."}</FormHelperText>
+            } 
+            />
+          <FormHelperText id='password-confirmation-helper-text' error={values.confirmationError}>{values.confirmationError ? 'Passwords don\'t match.' : 'Type in your password again.'}</FormHelperText>
         </FormControl>
 
         <br />
         <br />
 
-        <Button type="submit" variant='contained' onClick={signUp}>Sign up</Button>
+        <Button type='submit' variant='contained' onClick={signUp}>Sign up</Button>
 
         <br />
 

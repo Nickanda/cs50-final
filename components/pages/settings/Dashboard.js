@@ -1,5 +1,4 @@
 import * as React from 'react';
-import useCookies from 'react-cookie/cjs/useCookies';
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -37,8 +36,6 @@ export default function Home({ data, user }) {
     GL: '',
     TL: ''
   });
-
-  const [cookie] = useCookies(['antlab-session']);
 
   const handleOpenUpload = (item) => {
     setValues({
@@ -102,7 +99,7 @@ export default function Home({ data, user }) {
   const handleRadioUpload = (e) => {
     setUpload({
       ...upload,
-      "feignsDeath": JSON.parse(e.target.value)
+      'feignsDeath': JSON.parse(e.target.value)
     });
   }
 
@@ -129,8 +126,8 @@ export default function Home({ data, user }) {
       formData.append(key, upload[key]);
     }
 
-    fetch("http://127.0.0.1:3001/api/ants/database", {
-      method: "POST",
+    fetch('http://127.0.0.1:3001/api/ants/database', {
+      method: 'POST',
       credentials: 'include',
       body: formData
     })
@@ -152,7 +149,7 @@ export default function Home({ data, user }) {
     const saveData = {}
 
     for (const key in upload) {
-      if (upload[key] === '' && key !== "image") {
+      if (upload[key] === '' && key !== 'image') {
         setValues({
           ...values,
           openAlert: true,
@@ -166,10 +163,8 @@ export default function Home({ data, user }) {
 
     saveData._id = values.antData;
 
-    console.log(document.cookie)
-
-    fetch("http://127.0.0.1:3001/api/ants/database", {
-      method: "PUT",
+    fetch('http://127.0.0.1:3001/api/ants/database', {
+      method: 'PUT',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
@@ -226,7 +221,13 @@ export default function Home({ data, user }) {
 
       <Grid container spacing={{ md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {data.length > 0 ? data.filter(d => d.owner.includes(user._id)).map(item => (
-          <Grid item key={item._id} xs={12} sm={6} md={4}>
+          <Grid
+            item
+            key={item._id}
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <Card>
               <CardMedia
                 component='img'
@@ -250,13 +251,17 @@ export default function Home({ data, user }) {
           </Grid>
         )) : null}
 
-        <Container justify="center" align='center' sx={{
-          ml: 0,
-          mt: 3
-        }}>
+        <Container
+          justify='center'
+          align='center'
+          sx={{
+            ml: 0,
+            mt: 3
+          }}
+        >
           <Button
-            variant="contained"
-            component="label"
+            variant='contained'
+            component='label'
             onClick={() => handleOpenUpload(null)}
           >
             Upload Data
@@ -264,7 +269,11 @@ export default function Home({ data, user }) {
         </Container>
       </Grid>
 
-      <AntInfoDialog data={data.find(d => d._id == values.openLearnMore)} open={values.openLearnMore !== null} onClose={handleInfoClose} />
+      <AntInfoDialog
+        data={data.find(d => d._id == values.openLearnMore)}
+        open={values.openLearnMore !== null}
+        onClose={handleInfoClose}
+      />
 
       <AntManageDialog
         data={upload}

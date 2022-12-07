@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import useCookies from 'react-cookie/cjs/useCookies';
 
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -27,8 +26,6 @@ export default function Login() {
     username: '',
     password: ''
   });
-
-  // const [cookie, setCookie] = useCookies(['antlab-session']);
 
   const handleClickShowPassword = () => {
     setValues({
@@ -72,7 +69,7 @@ export default function Login() {
       setValues({
         ...values,
         openAlert: true,
-        loginError: "Please fill out all fields"
+        loginError: 'Please fill out all fields'
       })
       return;
     }
@@ -90,8 +87,6 @@ export default function Login() {
     }).then(res => res.json())
       .then(data => {
         if (data.status == 'ok') {
-          // setCookie('antlab-session', data.cookie, { path: '/', maxAge: 60 * 60 * 24 * 365 });
-
           window.location.href = '/';
         } else {
           setValues({
@@ -113,14 +108,15 @@ export default function Login() {
 
       <RemovableAlert text={values.loginError} open={values.openAlert} onClick={handleAlertRemoval} />
 
-      <FormGroup id="login-group">
+      <FormGroup id='login-group'>
         <FormControl>
           <InputLabel htmlFor='username'>Username</InputLabel>
           <Input
             id='username'
             aria-describedby='username-helper-text'
             type='text'
-            onChange={handleUsernameChange} />
+            onChange={handleUsernameChange}
+          />
         </FormControl>
 
         <br />
@@ -143,13 +139,14 @@ export default function Login() {
                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            } />
+            }
+          />
         </FormControl>
 
         <br />
         <br />
 
-        <Button type="submit" variant='contained' onClick={logIn}>Log In</Button>
+        <Button type='submit' variant='contained' onClick={logIn}>Log In</Button>
 
         <br />
 

@@ -6,7 +6,7 @@ export default function Dashboard({ user }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/settings" user={user} />
+      <Layout page='/settings' user={user} />
     </React.Fragment>
   );
 }

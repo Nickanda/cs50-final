@@ -11,7 +11,8 @@ router.options('/');
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
 
-  if (!username || !password || username == "" || password == "") {
+  // make sure all of the required fields are present
+  if (!username || !password || username == '' || password == '') {
     return res.status(400).json({
       status: 'error',
       message: 'Invalid username or password',
@@ -19,6 +20,7 @@ router.post('/', async (req, res) => {
   }
 
   try {
+    // find the user in the database, if it doesn't exist, return 400
     const user = await users.findOne({
       username: username
     }).collation({ locale: 'en', strength: 2 }).exec();
@@ -29,6 +31,7 @@ router.post('/', async (req, res) => {
         message: 'Username does not exist',
       });
 
+    // if the password is incorrect, return 400
     const validPassword = await argon2.verify(user.password, password);
 
     if (!validPassword)
@@ -37,6 +40,7 @@ router.post('/', async (req, res) => {
         message: 'Incorrect password',
       });
 
+    // create a new cookie for the user and send that cookie back to the client
     const cookie = uuidv4();
 
     await cookies.create({
@@ -54,10 +58,10 @@ router.post('/', async (req, res) => {
 
     return res.json({
       status: 'ok',
-      message: 'Login successful',
-      cookie: cookie
+      message: 'Login successful'
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       status: 'error',
       message: 'Internal server error',

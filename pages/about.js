@@ -6,7 +6,7 @@ export default function About({ user }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/about" user={user} />
+      <Layout page='/about' user={user} />
     </React.Fragment>
   );
 }

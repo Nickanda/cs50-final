@@ -6,7 +6,7 @@ export default function Contact({ user }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/contact" user={user} />
+      <Layout page='/contact' user={user} />
     </React.Fragment>
   );
 }

@@ -6,7 +6,7 @@ export default function Signup({ user }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Layout page="/signup" user={user} />
+      <Layout page='/signup' user={user} />
     </React.Fragment>
   );
 }

@@ -119,7 +119,7 @@ export default function Home() {
 
   const confirmDeleteAccount = () => {
     fetch('http://127.0.0.1:3001/api/account/delete', {
-      method: 'POST',
+      method: 'DELETE',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
@@ -206,35 +206,35 @@ export default function Home() {
 
           <TextField
             autoFocus
-            margin="dense"
-            id="oldPassword"
-            label="Old Password"
-            type="password"
+            margin='dense'
+            id='oldPassword'
+            label='Old Password'
+            type='password'
             fullWidth
-            variant="standard"
+            variant='standard'
             onChange={changeOldPassword}
           />
           <TextField
             autoFocus
-            margin="dense"
-            id="newPassword"
-            label="New Password"
-            type="password"
+            margin='dense'
+            id='newPassword'
+            label='New Password'
+            type='password'
             fullWidth
-            variant="standard"
+            variant='standard'
             onChange={changeNewPassword}
           />
           <TextField
             autoFocus
-            margin="dense"
-            id="confirmNewPassword"
-            label="Confirm New Password"
-            type="password"
+            margin='dense'
+            id='confirmNewPassword'
+            label='Confirm New Password'
+            type='password'
             fullWidth
-            variant="standard"
+            variant='standard'
             onChange={handlePasswordConfirmation}
             error={values.confirmationError}
-            helperText={values.confirmationError ? "Passwords don't match." : ""}
+            helperText={values.confirmationError ? 'Passwords don\'t match.' : ''}
           />
         </DialogContent>
         <DialogActions>

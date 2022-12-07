@@ -13,20 +13,10 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopo
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.on('connected', () => {
-  console.log('MongoDB has been connected!')
+  console.log('MongoDB has been connected!');
 });
 
-const whitelist = ['http://127.0.0.1:3000'];
-const corsOptions = {
-  origin: function(origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
-}
-
+// Set up middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
@@ -42,11 +32,22 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Cookie, Content-Type, Custom')
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Cookie, Content-Type, Custom');
 
   // Pass to next layer of middleware
   next();
 });
+
+const whitelist = ['http://127.0.0.1:3000'];
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  }
+}
 
 app.use(cors(corsOptions));
 

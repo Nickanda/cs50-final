@@ -26,7 +26,7 @@ export default function Home() {
       <br />
 
       <Grid container spacing={2}>
-        <Grid item xs={5} align="right">
+        <Grid item xs={5} align='right'>
           <Image src='/static/images/buck_trible.jpeg' alt='Buck Trible' width='220' height='220' />
         </Grid>
         <Grid item xs={7}>
@@ -37,7 +37,7 @@ export default function Home() {
             <b>Email:</b> <Link href='mailto:bucktrible@g.harvard.edu'>bucktrible@g.harvard.edu</Link>
           </Typography>
         </Grid>
-        <Grid item xs={5} align="right">
+        <Grid item xs={5} align='right'>
           <Image src='/static/images/gautum_reddy.jpeg' alt='Gautum Reddy' width='220' height='257' />
         </Grid>
         <Grid item xs={7}>
